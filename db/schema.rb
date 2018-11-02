@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181102185622) do
+ActiveRecord::Schema.define(version: 20181102210043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20181102185622) do
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_castings_on_actor_id"
     t.index ["movie_id"], name: "index_castings_on_movie_id"
+  end
+
+  create_table "directors_movies", force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "director_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["director_id"], name: "index_directors_movies_on_director_id"
+    t.index ["movie_id"], name: "index_directors_movies_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -39,6 +48,19 @@ ActiveRecord::Schema.define(version: 20181102185622) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "producers_movies", force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "producer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_producers_movies_on_movie_id"
+    t.index ["producer_id"], name: "index_producers_movies_on_producer_id"
+  end
+
   add_foreign_key "castings", "movies"
   add_foreign_key "castings", "people", column: "actor_id"
+  add_foreign_key "directors_movies", "movies"
+  add_foreign_key "directors_movies", "people", column: "director_id"
+  add_foreign_key "producers_movies", "movies"
+  add_foreign_key "producers_movies", "people", column: "producer_id"
 end
