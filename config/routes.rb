@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :castings
+    resources :movies
+    resources :people
+
+    root to: "castings#index"
+  end
+
   namespace :v1 do
     resources :movies
     resources :people
