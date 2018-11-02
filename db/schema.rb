@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181102183907) do
+ActiveRecord::Schema.define(version: 20181102185622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "castings", force: :cascade do |t|
+    t.bigint "movie_id"
+    t.bigint "actor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_castings_on_actor_id"
+    t.index ["movie_id"], name: "index_castings_on_movie_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "title"
@@ -30,4 +39,6 @@ ActiveRecord::Schema.define(version: 20181102183907) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "castings", "movies"
+  add_foreign_key "castings", "people", column: "actor_id"
 end
