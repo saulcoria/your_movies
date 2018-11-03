@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1">
+  <title>
+    <%= content_for(:title) %> - <%= Rails.application.class.parent_name.titlecase %>
+  </title>
+  <%= render "admin/application/stylesheet" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="app-container">
+    <main class="main-content" role="main">
+      <%= yield %>
+    </main>
+  </div>
+
+</body>
+</html>
