@@ -11,6 +11,7 @@ class PersonDashboard < Administrate::BaseDashboard
     id: Field::Number,
     first_name: Field::String,
     last_name: Field::String,
+    role: Field::Enum,
     aliases: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -26,6 +27,7 @@ class PersonDashboard < Administrate::BaseDashboard
     :first_name,
     :last_name,
     :aliases,
+    :role
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,6 +37,7 @@ class PersonDashboard < Administrate::BaseDashboard
     :first_name,
     :last_name,
     :aliases,
+    :role,
     :created_at,
     :updated_at,
   ].freeze
@@ -46,6 +49,7 @@ class PersonDashboard < Administrate::BaseDashboard
     :first_name,
     :last_name,
     :aliases,
+    :role,
   ].freeze
 
   # Overwrite this method to customize how people are displayed

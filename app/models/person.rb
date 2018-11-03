@@ -1,4 +1,13 @@
 class Person < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  enum role: [:admin, :actor, :director, :producer, :default]
+
+  # Callback
+  after_initialize :set_default_role, :if => :new_record?
 
   # Relationship
   has_many :castings, foreign_key: "actor_id"
@@ -12,5 +21,11 @@ class Person < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= :default
   end
 end
