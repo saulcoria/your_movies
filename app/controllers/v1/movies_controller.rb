@@ -1,6 +1,8 @@
 class V1::MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :update, :destroy]
 
+  acts_as_token_authentication_handler_for Person
+
   # GET /v1/movies
   def index
     @movies = Movie.all

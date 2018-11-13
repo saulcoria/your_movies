@@ -7,7 +7,8 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
     before_action :authenticate_admin
-
+    acts_as_token_authentication_handler_for Person
+ 
     before_action :authenticate_person!
 
     def authenticate_admin
